@@ -12,7 +12,7 @@
 <html>
 <head>
     <title>🎂 Chaline's 20th Birthday 💖</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">a
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         :root {
             --primary: #FF6B6B;
@@ -161,6 +161,16 @@
         <div class="timer-display hidden"></div>
     </div>
 
+    <!-- Jerry Verification Screen -->
+    <div id="jerryScreen" class="container hidden">
+        <h2>🎂 Chaline's 20th Birthday 💖</h2>
+        <p>In order to proceed to the next stage you have to buy Jerry Ijooz</p>
+        <h3>🔐 Enter Secret Password</h3>
+        <input type="password" id="jerryPasswordInput" placeholder="Secret code...">
+        <button onclick="checkJerryPassword()">Continue</button>
+        <div class="timer-display hidden"></div>
+    </div>
+
     <!-- Coordinate Screen -->
     <div id="coordinateScreen" class="container hidden">
         <h2>🎂 Chaline's 20th Birthday 💖</h2>
@@ -236,6 +246,15 @@
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
             if (password === '080805') {
+                showScreen('jerryScreen');
+            } else {
+                alert('🔒 Wrong password! Try again...');
+            }
+        }
+
+        function checkJerryPassword() {
+            const password = document.getElementById('jerryPasswordInput').value;
+            if (password === '220405') {
                 showScreen('coordinateScreen');
             } else {
                 alert('🔒 Wrong password! Try again...');
