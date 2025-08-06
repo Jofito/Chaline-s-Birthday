@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🎂 Chaline's 20th Birthday 💖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">a
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --gold: #FFD700;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            margin: 20px;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        input {
+            padding: 12px;
+            margin: 15px 0;
+            width: 80%;
+            border: 2px solid #eee;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 8px rgba(255,107,107,0.3);
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #FF5252;
+            transform: scale(1.05);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        #coordinateScreen {
+            padding: 2rem;
+        }
+
+        #prizeScreen {
+            background: linear-gradient(45deg, #FF9A9E, #fad0c4);
+            color: white;
+        }
+
+        .task-number {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        .upload-btn {
+            background: var(--secondary);
+            padding: 15px 30px;
+            font-size: 18px;
+        }
+
+        .upload-btn:hover {
+            background: #3dbeb5;
+        }
+
+        .task-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .task-buttons button {
+            flex: 1 1 40%;
+            min-width: 150px;
+        }
+
+        .completed {
+            background: var(--gold) !important;
+        }
+
+        .heart {
+            color: #FF6B6B;
+            font-size: 24px;
+            margin: 0 5px;
+        }
+        
+        .timer-display {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.7);
+            color: var(--gold);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Screen -->
+    <div id="passwordScreen" class="container">
+        <h2>🎂 Chaline's 20th Birthday 💖</h2>
+        <p>With all my love for you<span class="heart">❤️</span></p>
+        <h3>🔐 Enter Secret Password</h3>
+        <input type="password" id="passwordInput" placeholder="Birthday magic word...">
+        <button onclick="checkPassword()">Unlock Adventure</button>
+        <div class="timer-display hidden"></div>
+    </div>
+
+    <!-- Coordinate Screen -->
+    <div id="coordinateScreen" class="container hidden">
+        <h2>🎂 Chaline's 20th Birthday 💖</h2>
+        <p>📍 <strong>Coordinates:</strong><br>1.2816° N, 103.8636° E</p>
+        <p>Complete these tasks to find your birthday prize!</p>
+        <div class="task-buttons">
+            <button onclick="showScreen('task1')">Task 1: Dinosaur Neck</button>
+            <button onclick="showScreen('task2')">Task 2: Forest Letters</button>
+            <button onclick="showScreen('task3')">Task 3: Elegant Jaw</button>
+            <button onclick="showScreen('task4')">Task 4: Flying Dinosaur</button>
+        </div>
+        <div class="timer-display hidden"></div>
+    </div>
+
+    <!-- Task 1: Long-necked Dinosaur -->
+    <div id="task1" class="container hidden">
+        <span class="task-number">1</span>
+        <h3>🦖 Dinosaur Discovery</h3>
+        <p>What is the name of a dinosaur with a long neck?</p>
+        <input type="text" id="task1Answer" placeholder="One word...">
+        <button onclick="checkTask1()">Submit Answer</button>
+        <p><small>Hint: It has a very long neck</small></p>
+        <div class="timer-display hidden"></div>
+    </div>
+
+    <!-- Task 2: Cloud Forest Letters -->
+    <div id="task2" class="container hidden">
+        <span class="task-number">2</span>
+        <h3>🌿 Forest Name Challenge</h3>
+        <p>Guess the name of the forest we're in now. Enter the number of letters in its name.</p>
+        <input type="text" id="task2Answer" placeholder="Numbers only...">
+        <button onclick="checkTask2()">Submit Answer</button>
+        <p><small>Hint: A place with mist and tall trees</small></p>
+        <div class="timer-display hidden"></div>
+    </div>
+
+    <!-- Task 3: Dinosaur Jaw -->
+    <div id="task3" class="container hidden">
+        <span class="task-number">3</span>
+        <h3>🦖 Dinosaur Jaw</h3>
+        <p>What dinosaur has an elegant jaw?</p>
+        <input type="text" id="task3Answer" placeholder="One word...">
+        <button onclick="checkTask3()">Submit Answer</button>
+        <p><small>Hint: Think of a dinosaur with a delicate jaw</small></p>
+        <div class="timer-display hidden"></div>
+    </div>
+
+    <!-- Task 4: Flying Dinosaur -->
+    <div id="task4" class="container hidden">
+        <span class="task-number">4</span>
+        <h3>🦅 Flying Dinosaur</h3>
+        <p>What do you call a flying dinosaur?</p>
+        <input type="text" id="task4Answer" placeholder="One word...">
+        <button onclick="checkTask4()">Submit Answer</button>
+        <p><small>Hint: Ancient winged reptiles</small></p>
+        <div class="timer-display hidden"></div>
+    </div>
+
+    <!-- Prize Screen -->
+    <div id="prizeScreen" class="container hidden">
+        <h2>🎉 Happy 20th Birthday, Chaline! 🎉</h2>
+        <p>Congratulations baby! You have finished the CHALLENGE. In order to collect your prize you need to pat Jerry 3 times and say I love you. Later the prize at home hehehe :).</p>
+        <img src="https://cdn.pixabay.com/romantic/2023/08/30/romantic-06.jpg" alt="Celebration" style="max-width: 300px; border-radius: 10px; cursor: pointer;" onclick="startTimer()">
+        <p>❤️❤️❤️</p>
+        <div class="timer-display hidden"></div>
+    </div>
+
+    <script>
+        // Track completed tasks
+        let completedTasks = 0;
+        let timerInterval;
+
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            if (password === '080805') {
+                showScreen('coordinateScreen');
+            } else {
+                alert('🔒 Wrong password! Try again...');
+            }
+        }
+
+        function checkTask1() {
+            const answer = document.getElementById('task1Answer').value.toLowerCase().trim();
+            if (answer === 'brachiosaurus') {
+                markTaskComplete('task1');
+                checkCompletion();
+            } else {
+                alert('❌ Not quite! Hint: It has a very long neck');
+            }
+        }
+
+        function checkTask2() {
+            if (document.getElementById('task2Answer').value === '11') {
+                markTaskComplete('task2');
+                checkCompletion();
+            } else {
+                alert('❌ Not quite! Hint: A place with mist and tall trees');
+            }
+        }
+
+        function checkTask3() {
+            const answer = document.getElementById('task3Answer').value.toLowerCase().trim();
+            if (answer === 'compsognathus') {
+                markTaskComplete('task3');
+                checkCompletion();
+            } else {
+                alert('❌ Almost there! Think of a dinosaur with a delicate jaw');
+            }
+        }
+
+        function checkTask4() {
+            const answer = document.getElementById('task4Answer').value.toLowerCase().trim();
+            if (answer === 'pterosaurus') {
+                markTaskComplete('task4');
+                checkCompletion();
+            } else {
+                alert('❌ Not quite! Hint: Ancient winged reptiles');
+            }
+        }
+
+        function markTaskComplete(taskId) {
+            document.getElementById(taskId).classList.add('completed');
+            completedTasks++;
+            alert(`✅ Task completed! ${completedTasks}/4 done!`);
+        }
+
+        function checkCompletion() {
+            if (completedTasks === 4) {
+                showScreen('prizeScreen');
+            } else {
+                showScreen('coordinateScreen');
+            }
+        }
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.container').forEach(div => {
+                div.classList.add('hidden');
+            });
+            document.getElementById(screenId).classList.remove('hidden');
+        }
+
+        function startTimer() {
+            const timerDisplays = document.querySelectorAll('.timer-display');
+            timerDisplays.forEach(display => {
+                display.classList.remove('hidden');
+            });
+            
+            const endTime = new Date().getTime() + (3.5 * 60 * 60 * 1000);
+            
+            timerInterval = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = endTime - now;
+                
+                if (distance < 0) {
+                    clearInterval(timerInterval);
+                    timerDisplays.forEach(display => {
+                        display.innerHTML = "⏰ Time's up! Your prize is ready!";
+                    });
+                    return;
+                }
+                
+                const hours = Math.floor(distance / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                const timeString = `⏳ Time remaining: ${hours}h ${minutes}m ${seconds}s`;
+                timerDisplays.forEach(display => {
+                    display.innerHTML = timeString;
+                });
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
